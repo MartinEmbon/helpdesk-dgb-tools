@@ -1,0 +1,98 @@
+db.createCollection("alunos")
+
+db.alunos.insertOne(
+    {
+        "nome":"Andre",
+        "data_nascimento": new Date(1991,25,26),
+        "curso": {
+            "nome":"Matematica"
+        },
+        "notas":[7,9.9,4.5]
+    }
+)
+
+db.alunos.remove({
+    db.alunos.remove({"_id":ObjectId("62292c33f5b25916ae93690e")})
+})
+db.alunos.deleteOne({"nome":"Felipe"})
+
+db.alunos.find()
+db.alunos.find().pretty()
+db.alunos.find({nome:"Felipe"})
+db.alunos.find(
+    {"habilidades.nome":"ingles"}
+)
+db.alunos.find(
+    {
+       "nome":"Julio",
+        "curso.nome":"Matematica"
+     }
+)
+
+db.alunos.find(
+    {"curso.nome":"Sistema}
+)
+
+db.alunos.find({
+    $or:[
+        {"curso.nome":"Matematica"},
+        {"curso.nome":"Sistema"},
+        {"nome":"Julio"}
+    ]
+})
+
+db.alunos.find({
+    "curso.nome": {
+        $in: ["Sistemas de informação","Matematica"]
+    }
+})
+
+db.alunos.find({"nome": "Felipe", "data_nascimento": new Date(1994, 02, 26)})
+db.alunos.find({$or:[{nome:"Felipe"},{nome:"Julio"}]})
+
+db.alunos.find({notas:{$in:[10,4.5]}})
+db.alunos.find({notas:{$in:[11]}})
+
+Si un registro = true, devuelve array
+db.alunos.find({notas:{$gt:5}})
+db.alunos.findOne({notas:{$gt:5}})
+
+//ordena forma crescente
+db.alunos.find().sort({nome:1})
+//ordena forma descresente
+db.alunos.find().sort({nome:-1}).limit(3)
+
+
+db.alunos.update({_id: ObjectId("62293251f5b25916ae936913")},{$set:{notas:[10,9,8,7]}})
+
+db.alunos.update(
+    {"curso.nome":"Sistemas de informação"},
+    {$set: {
+        "curso.nome":"Sistema de informação"
+    }}
+)
+
+db.alunos.update(
+    {_id: ObjectId("62293251f5b25916ae936913")},
+    {
+        $push:{
+            "notas":[23,11]
+        }
+    }
+)
+
+db.alunos.update(
+    {"_id": ObjectId("62293251f5b25916ae936913")},
+    {$set:{
+        "notas":[10,9,8,11]
+    }}
+)
+
+db.alunos.update(
+    {"_id": ObjectId("62293251f5b25916ae936913")},
+    {$push:{
+        "notas":{$each:[130,19]}
+    }}
+)
+
+
