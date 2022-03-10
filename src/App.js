@@ -23,6 +23,8 @@ const App = () => {
       <div className="sidebar-container">
         <Sidebar />
         <Routes>
+        <Route path="/" element={<CreateCollection />} />
+
         <Route path="/mongodb/create" element={<CreateCollection />} />
         <Route path="/mongodb/insert" element={<InsertRecords />} />
         <Route path="/mongodb/delete" element={<DeleteRecords />} />
