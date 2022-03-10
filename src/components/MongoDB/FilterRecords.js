@@ -86,9 +86,9 @@ const FilterRecords = () => {
                             <Card.Text>
                                 <table>
                                     <tbody>
-                                        <td style={{paddingLeft:"12px"}}><li><Link to="/mongodb/in">$in Filter</Link> </li></td>
-                                        <td style={{paddingLeft:"12px"}}><li><Link to="/mongodb/or">$or Filter</Link> </li></td>
-                                        <td style={{paddingLeft:"12px"}}><li><Link to="/mongodb/gt">$gt/$lt Filter</Link> </li></td>
+                                        <td style={{paddingLeft:"12px"}}><li><Link to="/mongodb/in">$in</Link> </li></td>
+                                        <td style={{paddingLeft:"12px"}}><li><Link to="/mongodb/or">$or</Link> </li></td>
+                                        <td style={{paddingLeft:"12px"}}><li><Link to="/mongodb/gt">$gt/$lt</Link> </li></td>
 
                                     </tbody>
                                 </table>
