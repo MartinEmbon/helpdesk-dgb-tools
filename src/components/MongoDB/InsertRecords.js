@@ -37,7 +37,7 @@ const InsertRecords = () => {
                         <Card.Text>
                             <table>
                                 <tbody>
-                                    <tr>db.products.insertMany( [</tr>
+                                    <tr>db.produtos.insertMany( [</tr>
                                     <td style={{ paddingLeft: "16px" }}>&#123;item: "envelopes", qty: 60&#125;,</td>
                                     <td style={{ paddingLeft: "16px" }}>&#123;item: "folhas", qty: 1000&#125;,</td>
                                     <td style={{ paddingLeft: "16px" }}>&#123;item: "canetas", qty: 20&#125;</td>

@@ -8,7 +8,7 @@ const DeleteRecords = () => {
       <div className="card-container">
       <div className="my-card">
         <Card>
-          <Card.Header>Apagar registros</Card.Header>
+          <Card.Header>Apagar registros pelo _id</Card.Header>
           <Card.Body>
             <Card.Title>deleteOne</Card.Title>
             <Card.Text>
@@ -27,7 +27,7 @@ const DeleteRecords = () => {
 
       <div className="my-card">
         <Card>
-          <Card.Header>Apagar registros</Card.Header>
+          <Card.Header>Apagar registros pelo nome</Card.Header>
           <Card.Body>
             <Card.Title>deleteOne</Card.Title>
             <Card.Text>
@@ -44,7 +44,7 @@ const DeleteRecords = () => {
 
       <div className="my-card">
         <Card>
-          <Card.Header>Apagar registros</Card.Header>
+          <Card.Header>Apagar multiples registros</Card.Header>
           <Card.Body>
             <Card.Title>deleteMany</Card.Title>
             <Card.Text>
