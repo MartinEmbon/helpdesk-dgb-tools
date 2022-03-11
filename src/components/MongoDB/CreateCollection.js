@@ -7,11 +7,25 @@ const CreateCollection = () => {
   return (
     <div className="c-container">
       <div className="card-container">
+
+      <div className="my-card">
+          <Card>
+            <Card.Header>Comandos iniciais</Card.Header>
+            <Card.Body>
+              <Card.Title>Cria Banco de Dados </Card.Title>
+              <Card.Text>
+                use escola
+              </Card.Text>
+              <Button variant="primary" disabled>Copy Code</Button>
+            </Card.Body>
+          </Card>
+        </div>
+
         <div className="my-card">
           <Card>
             <Card.Header>Comandos iniciais</Card.Header>
             <Card.Body>
-              <Card.Title>Cria a coleção alunos</Card.Title>
+              <Card.Title>Cria a coleção alunos dentro do banco escola</Card.Title>
               <Card.Text>
                 db.createCollection("alunos")
               </Card.Text>
