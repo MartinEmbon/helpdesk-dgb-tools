@@ -7,15 +7,19 @@ import "../../App.css"
 const CreateCollection = () => {
   return (
     <div className="c-container">
-      <MongoMenu/>
+      <MongoMenu />
       <div className="card-container">
-      <div className="my-card">
+
+     
+        <div className="my-card">
           <Card>
-            <Card.Header>Comandos iniciais</Card.Header>
+            <Card.Header>Paginando Queries</Card.Header>
             <Card.Body>
-              <Card.Title>Cria Banco de Dados </Card.Title>
+              <Card.Title>LIMIT</Card.Title>
               <Card.Text>
-                use escola
+                <div className="col">
+                  <p>SELECT * FROM tabela_de_produtos LIMIT 5; </p>
+                </div>
               </Card.Text>
               <Button variant="primary" disabled>Copy Code</Button>
             </Card.Body>
@@ -24,11 +28,15 @@ const CreateCollection = () => {
 
         <div className="my-card">
           <Card>
-            <Card.Header>Comandos iniciais</Card.Header>
+            <Card.Header>Paginando Queries</Card.Header>
             <Card.Body>
-              <Card.Title>Cria a coleção alunos dentro do banco escola</Card.Title>
+              <Card.Title>LIMIT COM PARÁMETRO</Card.Title>
               <Card.Text>
-                db.createCollection("alunos")
+                <div className="col">
+                  <p>SELECT * FROM tabela_de_produtos LIMIT 2, 3;</p>
+                  <p>Pega a partir do segundo inclusive, um total de 3 registros</p>
+                  <p>OBS: Registro começa a partir do índice 0</p>
+                </div>
               </Card.Text>
               <Button variant="primary" disabled>Copy Code</Button>
             </Card.Body>
@@ -37,17 +45,28 @@ const CreateCollection = () => {
 
         <div className="my-card">
           <Card>
-            <Card.Header>Comandos iniciais</Card.Header>
+            <Card.Header>Ordenando Saída Queries</Card.Header>
             <Card.Body>
-              <Card.Title>Apagando a coleçâo alunos.</Card.Title>
+              <Card.Title>ORDER BY</Card.Title>
               <Card.Text>
-                db.alunos.drop()
+                <div className="col">
+                  <p>SELECT * FROM tabela_de_produtos ORDER BY preco_de_lista;</p>
+                  <p>Ordena menor a maior</p>
+                  <p>SELECT * FROM tabela_de_produtos ORDER BY preco_de_lista DESC;</p>
+                  <p>Ordena maior a menor</p>
+                  <p>SELECT * FROM tabela_de_produtos</p>
+                  <p>ORDER BY sabor ASC, preco_de_lista DESC;</p>
+                  <p>Combinar colunas</p>
+                </div>
               </Card.Text>
               <Button variant="primary" disabled>Copy Code</Button>
             </Card.Body>
           </Card>
         </div>
+
       </div>
+
+
 
       <div className="alert">
         <Alert variant="success">

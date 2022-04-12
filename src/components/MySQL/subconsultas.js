@@ -7,15 +7,20 @@ import "../../App.css"
 const CreateCollection = () => {
   return (
     <div className="c-container">
-      <MongoMenu/>
+      <MongoMenu />
       <div className="card-container">
-      <div className="my-card">
+
+        <div className="my-card">
           <Card>
-            <Card.Header>Comandos iniciais</Card.Header>
+            <Card.Header>Subconsultas</Card.Header>
             <Card.Body>
-              <Card.Title>Cria Banco de Dados </Card.Title>
+              <Card.Title>SUBCONSULTAS.</Card.Title>
               <Card.Text>
-                use escola
+                <div className="col">            
+                  <p>SELECT * FROM tabela_de_clientes</p>
+                  <p>WHERE bairro IN</p>              
+                  <p>(SELECT DISTINCT bairro from tabela_de_vendedores);</p>              
+                </div>
               </Card.Text>
               <Button variant="primary" disabled>Copy Code</Button>
             </Card.Body>
@@ -24,30 +29,26 @@ const CreateCollection = () => {
 
         <div className="my-card">
           <Card>
-            <Card.Header>Comandos iniciais</Card.Header>
+            <Card.Header>Subconsultas II</Card.Header>
             <Card.Body>
-              <Card.Title>Cria a coleção alunos dentro do banco escola</Card.Title>
+              <Card.Title>SUBCONSULTAS.</Card.Title>
               <Card.Text>
-                db.createCollection("alunos")
+                <div className="col">            
+                  <p>SELECT x.embalagem, x.preco_maximo FROM</p>
+                  <p>(SELECT embalagem, MAX(preco_de_lista) as PRECO_MAXIMO</p>          
+                  <p>from tabela_de_produtos group by embalagem)</p>
+                  <p> X where x.preco_maximo >=10;</p>
+                </div>
               </Card.Text>
               <Button variant="primary" disabled>Copy Code</Button>
             </Card.Body>
           </Card>
         </div>
 
-        <div className="my-card">
-          <Card>
-            <Card.Header>Comandos iniciais</Card.Header>
-            <Card.Body>
-              <Card.Title>Apagando a coleçâo alunos.</Card.Title>
-              <Card.Text>
-                db.alunos.drop()
-              </Card.Text>
-              <Button variant="primary" disabled>Copy Code</Button>
-            </Card.Body>
-          </Card>
-        </div>
+
       </div>
+
+
 
       <div className="alert">
         <Alert variant="success">

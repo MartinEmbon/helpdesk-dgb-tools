@@ -1,7 +1,7 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Card, Button, Alert } from 'react-bootstrap'
-import MongoMenu from './Menu'
+import MongoMenu from './MongoMenu'
 
 import "../../App.css"
 const UpdateRecords = () => {

@@ -7,15 +7,23 @@ import "../../App.css"
 const CreateCollection = () => {
   return (
     <div className="c-container">
-      <MongoMenu/>
+      <MongoMenu />
       <div className="card-container">
-      <div className="my-card">
+
+        <div className="my-card">
           <Card>
-            <Card.Header>Comandos iniciais</Card.Header>
+            <Card.Header>Clarificando queries</Card.Header>
             <Card.Body>
-              <Card.Title>Cria Banco de Dados </Card.Title>
+              <Card.Title>CASE. Fazemos um teste em um ou mais campos<br></br>e dependendo resultado, teremos um ou outro valor</Card.Title>
               <Card.Text>
-                use escola
+                <div className="col">
+                  <p>SELECT NOME_DO_PRODUTO, PRECO_DE_LISTA,</p>
+                  <p>CASE</p>
+                  <p>WHEN preco_de_lista > 12 THEN "PRODUTO CARO"</p>
+                  <p>WHEN preco_de_lista >=7 THEN "PRODUTO EM CONTA"</p>
+                  <p>ELSE "produto barato" </p>
+                  <p>END AS status_preco FROM tabela_de_produtos;</p>
+                </div>
               </Card.Text>
               <Button variant="primary" disabled>Copy Code</Button>
             </Card.Body>
@@ -24,30 +32,28 @@ const CreateCollection = () => {
 
         <div className="my-card">
           <Card>
-            <Card.Header>Comandos iniciais</Card.Header>
+            <Card.Header>Clarificando queries</Card.Header>
             <Card.Body>
-              <Card.Title>Cria a coleção alunos dentro do banco escola</Card.Title>
+              <Card.Title>CASE. Fazemos um teste em um ou mais campos<br></br>e dependendo resultado, teremos um ou outro valor</Card.Title>
               <Card.Text>
-                db.createCollection("alunos")
+                <div className="col">
+                  <p>SELECT nome,</p>
+                  <p>CASE</p>
+                  <p>WHEN YEAR(DATA_DE_NASCIMENTO) "lt" 1990 THEN "velho"</p>
+                  <p>WHEN YEAR(DATA_DE_NASCIMENTO) between 1990 and 1995 THEN "jovem"</p>
+                  <p>ELSE "crianças"</p>
+                  <p>end as clasificacao from tabela_de_clientes;</p>
+                </div>
               </Card.Text>
               <Button variant="primary" disabled>Copy Code</Button>
             </Card.Body>
           </Card>
         </div>
 
-        <div className="my-card">
-          <Card>
-            <Card.Header>Comandos iniciais</Card.Header>
-            <Card.Body>
-              <Card.Title>Apagando a coleçâo alunos.</Card.Title>
-              <Card.Text>
-                db.alunos.drop()
-              </Card.Text>
-              <Button variant="primary" disabled>Copy Code</Button>
-            </Card.Body>
-          </Card>
-        </div>
+
       </div>
+
+
 
       <div className="alert">
         <Alert variant="success">

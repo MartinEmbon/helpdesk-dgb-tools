@@ -2,9 +2,11 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Card, Button, Alert } from 'react-bootstrap'
 import "../../App.css"
+import MongoMenu from './Menu'
 const InsertRecords = () => {
     return (
         <div className="c-container">    
+        <MongoMenu/>
            <div className="card-container">
            <div className="my-card">
                 <Card>

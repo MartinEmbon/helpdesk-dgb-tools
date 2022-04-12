@@ -56,6 +56,12 @@ tbody{
   padding: 10px;
 }
 
+.topbar{
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
 .sidebar h3 {
   font-size: 14px;
   padding-top: 20px;
@@ -64,13 +70,27 @@ tbody{
 .sidebar-menu {
   margin: 0;
   padding:0;
+  ;
 }
-.sidebar-menu li {
+
+.sidebar-menu2 {
+  margin: 0;
+  padding:0;
+  display: flex;
+}
+
+.right{
+  padding-left: 12px;
+}
+
+.sidebar-menu li,
+.sidebar-menu2 {
   list-style: none;
   margin: 0;
   padding: 2.5px 0;
   width: 100%;
   padding-left: 10px;
+  
 }
 
 .sidebar-menu li:hover{
@@ -85,4 +105,17 @@ tbody{
 
 .alert{
   height: fit-content;
+}
+
+.tab-container{
+  width: 80%;
+  margin:1rem;
+}
+
+.tab-container p {
+  padding-left: 16px;
+}
+
+.col > p{
+  line-height: 12px;
 }

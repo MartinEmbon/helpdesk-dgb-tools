@@ -1,11 +1,14 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Card, Button, Alert } from 'react-bootstrap'
+import MongoMenu from './Menu'
+
 import "../../App.css"
 
 const SortLimit = () => {
   return (
     <div className='c-container'>
+        <MongoMenu/>
     <div className="card-container">
     <div className="my-card">
                 <Card>

@@ -7,15 +7,22 @@ import "../../App.css"
 const CreateCollection = () => {
   return (
     <div className="c-container">
-      <MongoMenu/>
+      <MongoMenu />
       <div className="card-container">
-      <div className="my-card">
+
+        <div className="my-card">
           <Card>
-            <Card.Header>Comandos iniciais</Card.Header>
+            <Card.Header>Clarificando queries.  Unir uma ou mas tabelas a través de campos em comun</Card.Header>
             <Card.Body>
-              <Card.Title>Cria Banco de Dados </Card.Title>
+              <Card.Title>JOIN.</Card.Title>
               <Card.Text>
-                use escola
+                <div className="col">            
+                  <p>SELECT a.matricula, a.nome, count(*) from</p>
+                  <p>tabela_de_vendedores A </p>          
+                  <p>INNER JOIN notas_fiscais b</p>
+                  <p>on a.matricula = b.matricula</p>
+                  <p>group by a.matricula, a.nome;</p>
+                </div>
               </Card.Text>
               <Button variant="primary" disabled>Copy Code</Button>
             </Card.Body>
@@ -24,30 +31,27 @@ const CreateCollection = () => {
 
         <div className="my-card">
           <Card>
-            <Card.Header>Comandos iniciais</Card.Header>
+            <Card.Header>Clarificando queries.  Unir uma ou mas tabelas a través de campos em comun</Card.Header>
             <Card.Body>
-              <Card.Title>Cria a coleção alunos dentro do banco escola</Card.Title>
+              <Card.Title>JOIN.</Card.Title>
               <Card.Text>
-                db.createCollection("alunos")
+                <div className="col">            
+                  <p>SELECT a.matricula, a.nome, count(*) from</p>
+                  <p>tabela_de_vendedores A </p>          
+                  <p>INNER JOIN notas_fiscais b</p>
+                  <p>on a.matricula = b.matricula</p>
+                  <p>group by a.matricula, a.nome;</p>
+                </div>
               </Card.Text>
               <Button variant="primary" disabled>Copy Code</Button>
             </Card.Body>
           </Card>
         </div>
 
-        <div className="my-card">
-          <Card>
-            <Card.Header>Comandos iniciais</Card.Header>
-            <Card.Body>
-              <Card.Title>Apagando a coleçâo alunos.</Card.Title>
-              <Card.Text>
-                db.alunos.drop()
-              </Card.Text>
-              <Button variant="primary" disabled>Copy Code</Button>
-            </Card.Body>
-          </Card>
-        </div>
+
       </div>
+
+
 
       <div className="alert">
         <Alert variant="success">

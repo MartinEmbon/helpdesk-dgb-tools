@@ -1,0 +1,437 @@
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "body": {
+        "data": {
+          "admission": {
+            "documentsTemplate": {
+              "name": "=toUpper(@(1,name))"
+            },
+            "documents": {
+              "preEmployee": {
+                "*": {
+                  "name": "=trim"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "body": {
+        "data": {
+          "application": {
+            "id": "&1&"
+          },
+          "job": {
+            "id": "&1&",
+            "branch": {
+              "id": {
+                "282552": {
+                  "#40": "data.numEmp"
+                },
+                "*": {
+                  "#12": "data.numEmp"
+                }
+              }
+            }
+          },
+          "admission": {
+            "documentsTemplate": {
+              "id": {
+                "18312": {
+                  "#1": "data.tipCon",
+                  "#01": "data.catSef"
+                },
+                "18313": {
+                  "#1": "data.tipCon",
+                  "#01": "data.catSef"
+                },
+                "18314": {
+                  "#1": "data.tipCon",
+                  "#01": "data.catSef"
+                },
+                "18315": {
+                  "#1": "data.tipCon",
+                  "#01": "data.catSef"
+                },
+                "18316": {
+                  "#1": "data.tipCon",
+                  "#01": "data.catSef"
+                },
+                "18317": {
+                  "#1": "data.tipCon",
+                  "#99": "data.catSef"
+                },
+                "18418": {
+                  "#5": "data.tipCon",
+                  "#99": "data.catSef"
+                },
+                "*": {
+                  "#5": "data.tipCon",
+                  "#01": "data.catSef"
+                }
+              },
+              "name": {
+                "*ESTAGIO*|*ESTÁGIO*": {
+                  "#901": "data.catEso"
+                },
+                "*CLT*": {
+                  "#101": "data.catEso"
+                },
+                "*APRENDIZ*": {
+                  "#103": "data.catEso"
+                }
+              }
+            },
+            "documents": {
+              "preEmployee": {
+                "*": {
+                  "name": {
+                    "Carteira de Identidade (RG)": {
+                      "@(2,values)": {
+                        "cidade-onde-nasceu": "data.cciNas",
+                        "uf-emissor": "data.cidEmi",
+                        "nome": "data.nomFun",
+                        "genero": "data.tipSex",
+                        "nacionalidade": "data.codNac",
+                        "numero-do-rg": "data.numCid",
+                        "data-de-nascimento": "data.datNas",
+                        "data-de-expedicao": "data.dexCid",
+                        "orgao-emissor": "data.emiCid",
+                        "nome-social": "data.nomSoc",
+                        "estado-onde-nasceu": "data.estNas",
+                        "estado-civil": {
+                          "Solteiro(a)": {
+                            "#1": "data.estCiv"
+                          },
+                          "Casado(a)": {
+                            "#2": "data.estCiv"
+                          },
+                          "Divorciado(a)": {
+                            "#3": "data.estCiv"
+                          },
+                          "Viúvo": {
+                            "#4": "data.estCiv"
+                          }
+                        },
+                        "etnia": {
+                          "Não Informado": {
+                            "#0": "data.racCor"
+                          },
+                          "Branca": {
+                            "#1": "data.racCor"
+                          },
+                          "Preta": {
+                            "#2": "data.racCor"
+                          },
+                          "Amarela": {
+                            "#3": "data.racCor"
+                          },
+                          "Parda": {
+                            "#4": "data.racCor"
+                          },
+                          "Indígena": {
+                            "#5": "data.racCor"
+                          },
+                          "Mameluco": {
+                            "#6": "data.racCor"
+                          },
+                          "Mulato": {
+                            "#7": "data.racCor"
+                          },
+                          "Cafuzo": {
+                            "#8": "data.racCor"
+                          }
+                        }
+                      }
+                    },
+                    "Plano de Saúde": {
+                      "@(2,values)": {
+                        "e72cfeca-6051-49fb-8715-76394cfd5428": {
+                          "true": {
+                            "#23": "data.planoTitular[#7].codOem"
+                          }
+                        },
+                        "820afd64-996d-45ac-a1aa-a45199426b97": {
+                          "Enfermaria*": {
+                            "#001": "data.planoTitular[#7].codPla"
+                          },
+                          "Apartamento*": {
+                            "#110": "data.planoTitular[#7].codPla"
+                          }
+                        }
+                      }
+                    },
+                    "Plano Odontológico": {
+                      "@(2,values)": {
+                        "cbaba47b-3eaa-4511-bbff-b0c1b1f19116": {
+                          "true": {
+                            "#94": "data.planoTitular[#7].codOem",
+                            "#001": "data.planoTitular[#7].codPla"
+                          }
+                        }
+                      }
+                    },
+                    "Comprovante de Escolaridade": {
+                      "@(2,values)": {
+                        "6c754952-b5de-487d-8806-5e4129eb94c7": "data.codQua",
+                        "75e5a3fc-c096-4afa-89a9-83baadfc2e98": "data.graIns"
+                      }
+                    },
+                    "Vale-transporte": {
+                      "@(2,values)": {
+                        "c16912bd-cdbf-4bbe-abb7-23e0053fda37": {
+                          "true": {
+                            "#013": "data.codVal",
+                            "#100": "data.escVtr"
+                          }
+                        }
+                      }
+                    },
+                    "Contatos": {
+                      "@(2,values)": {
+                        "dfc9d003-36ec-4d6e-9940-9f7dfc6c50de": "data.dddTel",
+                        "83ed3cef-a91d-464a-992e-e49d23d17077": "data.numDdd2",
+                        "f771527d-692b-4336-b1c2-154c7dee0710": "data.numTel",
+                        "10756284-5580-4fe4-add7-f14c9f62ee9c": "data.nmTel2"
+                      }
+                    },
+                    "Holerite": {
+                      "@(2,values)": {
+                        "0e370e13-3001-4ce0-98a8-369e27d90ae8": "data.emaPar",
+                        "07b382c6-1eab-49fb-a204-a29d1d703f46": "data.USU_EnvHol"
+                      }
+                    },
+                    "Carteira de Habilitação (CNH)": {
+                      "@(2,values)": {
+                        "data-da-primeira-habilitacao": "data.priCnh",
+                        "data-de-emissao": "data.datCnh",
+                        "uf-emissor": "data.estCnh",
+                        "orgao-emissor": "data.orgCnh",
+                        "numero-de-registro": "data.numCnh",
+                        "validade": "data.venCnh",
+                        "categoria": "data.catCnh"
+                      }
+                    },
+                    "Comprovante de residência": {
+                      "@(2,values)": {
+                        "cep": "data.endCep",
+                        "bairro": "data.nomBai",
+                        "numero": "data.endNum",
+                        "tipo": "data.tipLgr",
+                        "cidade": "data.codCid",
+                        "logradouro": "data.endRua",
+                        "complemento": "data.endCpl"
+                      }
+                    },
+                    "CPF": {
+                      "@(2,values)": {
+                        "numero-do-cpf": "data.numCpf"
+                      }
+                    },
+                    "Carteira de Trabalho (CTPS)": {
+                      "@(2,values)": {
+                        "serie-ctps": "data.serCtp",
+                        "uf-emissor": "data.estCtp",
+                        "numero-ctps": "data.numCtp",
+                        "data-de-emissao": "data.dexCtp"
+                      }
+                    },
+                    "Comprovante de PIS/Pasep": {
+                      "@(2,values)": {
+                        "numero": "data.numPis"
+                      }
+                    },
+                    "Certificado de Reservista": {
+                      "@(2,values)": {
+                        "numero-ra": "data.numRes",
+                        "categoria-militar": "data.catRes"
+                      }
+                    },
+                    "Título de Eleitor": {
+                      "@(2,values)": {
+                        "numero": "data.numEle",
+                        "secao": "data.secEle",
+                        "zona": "data.zonEle"
+                      }
+                    },
+                    "Direito de Imagem": {
+                      "@(2,values)": {
+                        "c0baa8e2-a1c6-4965-a00d-44501b11fd7b": "data.USU_CodigW"
+                      }
+                    },
+                    "Cartão do SUS": {
+                      "@(2,values)": {
+                        "182ae62e-ea42-4fbe-8896-8e666105ea93": "data.CarSus"
+                      }
+                    },
+                    "Convênio Farmácia": {
+                      "@(2,values)": {
+                        "ccdb2b38-d582-45ef-bb8b-88e6b1346cce": {
+                          "true": {
+                            "#0": "data.perSub",
+                            "#013": "data.codVal"
+                          }
+                        }
+                      }
+                    },
+                    "Uniforme - OPERACIONAL": {
+                      "@(2,values)": {
+                        "68086955-4b9d-4601-adc3-36579a503933": "data.USU_TamCal",
+                        "c3653e95-7a53-4bd0-9fb9-63ec23d4a0df": {
+                          "PP": {
+                            "#0001": "data.USU_TamUni"
+                          },
+                          "P": {
+                            "#0002": "data.USU_TamUni"
+                          },
+                          "M": {
+                            "#0003": "data.USU_TamUni"
+                          },
+                          "G": {
+                            "#0004": "data.USU_TamUni"
+                          },
+                          "GG": {
+                            "#0005": "data.USU_TamUni"
+                          },
+                          "EG": {
+                            "#0006": "data.USU_TamUni"
+                          }
+                        }
+                      }
+                    },
+                    "Uniforme - ADMINISTRATIVO": {
+                      "@(2,values)": {
+                        "68086955-4b9d-4601-adc3-36579a503933": "data.USU_TamCal",
+                        "c3653e95-7a53-4bd0-9fb9-63ec23d4a0df": {
+                          "PP": {
+                            "#0001": "data.USU_TamUni"
+                          },
+                          "P": {
+                            "#0002": "data.USU_TamUni"
+                          },
+                          "M": {
+                            "#0003": "data.USU_TamUni"
+                          },
+                          "G": {
+                            "#0004": "data.USU_TamUni"
+                          },
+                          "GG": {
+                            "#0005": "data.USU_TamUni"
+                          },
+                          "EG": {
+                            "#0006": "data.USU_TamUni"
+                          }
+                        },
+                        "ca94f458-04e3-4b45-8d28-f742b31de9e6": {
+                          "Manga Curta": {
+                            "#0001": "data.USU_TipUni"
+                          },
+                          "Manga Longa": {
+                            "#0002": "data.USU_TipUni"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "dependents": {
+                "*": {
+                  "dependentTypeId": {
+                    "3808db5b-b808-4cf0-97c6-9ac15cc98125": {
+                      "#1": "data.dependentes[#4].graPar",
+                      "#21": "data.dependentes[#4].limIrf"
+                    },
+                    "b0264e29-fa41-454e-8a06-8de38b7a9e68": {
+                      "#17": "data.dependentes[#4].graPar",
+                      "#0": "data.dependentes[#4].limIrf"
+                    },
+                    "b8a3e77a-fcf1-40ea-80cf-aea313969043": {
+                      "#18": "data.dependentes[#4].graPar",
+                      "#0": "data.dependentes[#4].limIrf"
+                    },
+                    "164a646f-cc83-462e-8f83-f206703d6843": {
+                      "#16": "data.dependentes[#4].graPar",
+                      "#0": "data.dependentes[#4].limIrf"
+                    },
+                    "a93534d0-2337-4a1a-8533-013aaf826732": {
+                      "#2": "data.dependentes[#4].graPar",
+                      "#0": "data.dependentes[#4].limIrf"
+                    },
+                    "*": {
+                      "#99": "data.dependentes[#4].graPar",
+                      "#0": "data.dependentes[#4].limIrf"
+                    }
+                  },
+                  "documents": {
+                    "*": {
+                      "name": {
+                        "Dados do dependente": {
+                          "@(2,values)": {
+                            "cpf": "data.dependentes[#7].numCpf",
+                            "name": "data.dependentes[#7].nomDep",
+                            "birthDate": "data.dependentes.[#7].datNas"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "default",
+    "spec": {
+      "data": {
+        "horInc": "",
+        "numDdi2": "55",
+        "estCid": ""
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "data": {
+        "dependentes": {
+          "*": {
+            "numCpf": "=split('[.-]',@(1,numCpf))"
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "data": {
+        "dependentes": {
+          "*": {
+            "numCpf": "=join('',@(1,numCpf))",
+            "nomDep": "=trim(@(1,nomDep))",
+            "datNas": "=trim(@(1,datNas))",
+            "limSaf": "14"
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "data": "=recursivelySquashNulls"
+    }
+  }
+]

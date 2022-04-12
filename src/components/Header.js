@@ -13,6 +13,7 @@ const Header = () => {
     <Nav className="me-auto">
       <Nav.Link> <Link to="/">Home</Link></Nav.Link>
       <Nav.Link><Link to="/mongodb/create">MongoDB</Link></Nav.Link>
+      <Nav.Link><Link to="/docker">Docker</Link></Nav.Link>
       <Nav.Link href="/mongodb">MySQL (coming soon)</Nav.Link>
     </Nav>
     </Container>
