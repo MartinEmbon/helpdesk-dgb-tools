@@ -25,6 +25,13 @@ import MySQLJoin from "./components/MySQL/comandoJoin"
 import MySQLSub from "./components/MySQL/subconsultas"
 import MySQLLimit from "./components/MySQL/comandosLimit"
 import MySQLGroup from "./components/MySQL/comandosGroupBy"
+import MySQLFunctions from "./components/MySQL/funcoes"
+import MySQLCommit from "./components/MySQL/commit-e-rollback"
+import MySQLTrigger from "./components/MySQL/trigger"
+import MySQLGlobals from "./components/MySQL/globals"
+
+import Certificados from './components/Certificados/Certificados'
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -36,6 +43,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<CreateCollection />} />
           <Route path="/docker" element={<Docker />} />
+          <Route path="/certificados" element={<Certificados />} />
 
           <Route path="/mongodb/create" element={<CreateCollection />} />
           <Route path="/mongodb/insert" element={<InsertRecords />} />
@@ -60,6 +68,10 @@ const App = () => {
           <Route path="/mysql/subconsultas" element={<MySQLSub />} />
           <Route path="/mysql/limit" element={<MySQLLimit />} />
           <Route path="/mysql/group" element={<MySQLGroup />} />
+          <Route path="/mysql/funcoes" element={<MySQLFunctions />} />
+          <Route path="/mysql/commit-e-rollback" element={<MySQLCommit />} />
+          <Route path="/mysql/trigger" element={<MySQLTrigger />} />
+          <Route path="/mysql/globals" element={<MySQLGlobals />} />
 
         </Routes>
       </div>

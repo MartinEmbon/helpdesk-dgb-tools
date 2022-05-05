@@ -34,8 +34,7 @@ const CreateCollection = () => {
                   <p>CREATE TABLE table_name(</p>
                   <p>column1 datatype,</p>
                   <p> column2 datatype,</p>
-                  <p>  column3 datatype</p>
-                  <p> );</p>
+                  <p>  column3 datatype );</p>                  
                 </div>
               </Card.Text>
               <Button variant="primary" disabled>Copy Code</Button>
@@ -52,7 +51,23 @@ const CreateCollection = () => {
               <Card.Text>
                 <div className="col">
                   <p>ALTER TABLE funcionarios</p>
-                  <p>ADD email varchar(255);</p>
+                  <p>ADD column email varchar(255);</p>
+                </div>
+              </Card.Text>
+              <Button variant="primary" disabled>Copy Code</Button>
+            </Card.Body>
+          </Card>
+        </div>
+
+        <div className="my-card">
+          <Card>
+            <Card.Header>Comandos DDL</Card.Header>
+            <Card.Body>
+              <Card.Title>Apagar colunas</Card.Title>
+              <Card.Text>
+                <div className="col">
+                  <p>Alter table vendedores</p>
+                  <p>drop column ferias;</p>
                 </div>
               </Card.Text>
               <Button variant="primary" disabled>Copy Code</Button>
@@ -80,6 +95,32 @@ const CreateCollection = () => {
               <Card.Title>Deletar todas las filas (data)</Card.Title>
               <Card.Text>
                 TRUNCATE TABLE funcionarios;
+              </Card.Text>
+              <Button variant="primary" disabled>Copy Code</Button>
+            </Card.Body>
+          </Card>
+        </div>
+
+        <div className="my-card">
+          <Card>
+            <Card.Header>Comandos DDL</Card.Header>
+            <Card.Body>
+              <Card.Title>Duplicar tabela existente COM valores. Não herda<br></br> auto_increment nem índices</Card.Title>
+              <Card.Text>
+                 CREATE TABLE new_table AS SELECT * FROM original_table;
+              </Card.Text>
+              <Button variant="primary" disabled>Copy Code</Button>
+            </Card.Body>
+          </Card>
+        </div>
+
+        <div className="my-card">
+          <Card>
+            <Card.Header>Comandos DDL</Card.Header>
+            <Card.Body>
+              <Card.Title>Duplicar tabela existente SEM valores</Card.Title>
+              <Card.Text>
+                CREATE TABLE new_table LIKE original_table;
               </Card.Text>
               <Button variant="primary" disabled>Copy Code</Button>
             </Card.Body>

@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <html>
+
+<head>
+    <meta charset=\"UTF-8\">
+    <style type=\"text/css\">
+        body {
+            font-family: Arial, Helvetica;
+        }
+
+        hr {
+            color: #4485b8;
+        }
+
+        h1 {
+            color: #4485b8;
+        }
+
+        h2 {
+            color: #444444;
+            font-weight: bold
+        }
+
+        table {
+            width: 100%;
+            vertical-align: top;
+            border-collapse: collapse;
+            max-width: 100%;
+            table-layout: fixed;
+            word-wrap: break-word;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #AAAAAA;
+            font-size: 12px;
+        }
+
+        thead {
+            color: #444444;
+            font-weight: bold;
+            background-color: #CCCCCC;
+        }
+
+        input[type=button] {
+            font-size: 10px;
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: #fefefe;
+            margin: auto;
+            padding: 0;
+            border: 1px solid #888;
+            width: 80%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s
+        }
+
+        @-webkit-keyframes animatetop {
+            from {
+                top: -300px;
+                opacity: 0
+            }
+
+            to {
+                top: 0;
+                opacity: 1
+            }
+        }
+
+        @keyframes animatetop {
+            from {
+                top: -300px;
+                opacity: 0
+            }
+
+            to {
+                top: 0;
+                opacity: 1
+            }
+        }
+
+        .close {
+            color: white;
+            float: right;
+            padding-top: 10px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-header {
+            padding: 2px 20px;
+            background-color: #4485b8;
+            color: white;
+        }
+
+        .modal-body {
+            padding: 2px 16px;
+            max-height: 600px;
+            overflow-y: scroll;
+        }
+
+        .modal-footer {
+            padding: 2px 2px;
+            background-color: #4485b8;
+            color: white;
+        }
+
+        .detail {
+            font-size: 16px !important;
+            border: 0px;
+            vertical-align: top;
+            border-bottom: 1px solid #AAAAAA;
+        }
+
+        .subheader {
+            font-size: 20px !important;
+            border: 0px;
+            vertical-align: bottom;
+            border-bottom: 2px solid #444444;
+            height: 42px;
+        }
+    </style>
+    <script
+        type=\"text/javascript\">function fetchDetail(elementid){var ajax = new XMLHttpRequest();var urlObj = new URL(location.href);var newUrl = location.protocol + \"//\" + location.host + location.pathname + \"?apikey=\" + urlObj.searchParams.get(\"apikey\") + \"&detail=\" + encodeURI(elementid);ajax.open(\"GET\", newUrl, true);ajax.onreadystatechange = function() {if (ajax.readyState == 4 && ajax.status == 200) {var modal = document.getElementById(\"myModal\");var span = document.getElementsByClassName(\"close\")[0];var modaltext = document.getElementById(\"modalText\");modaltext.innerHTML = ajax.responseText.replace(/\\\\/g, \"\");span.onclick = function() { modal.style.display = \"none\"; };window.onclick = function(event) { if (event.target == modal) { modal.style.display = \"none\"; }; };modal.style.display = \"block\";};};ajax.send();};function clearMessage(elementid){if (confirm(\"Tem certeza que deseja remover o registro \"+elementid+\" da fila de integração?\")){var ajax = new XMLHttpRequest();var urlObj = new URL(location.href);var newUrl = location.protocol + \"//\" + location.host + location.pathname + \"?apikey=\" + urlObj.searchParams.get(\"apikey\") + \"&clear=\" + encodeURI(elementid);ajax.open(\"GET\", newUrl, true);ajax.onreadystatechange = function() {if (ajax.readyState == 4 && ajax.status == 200) {alert (\"Registro removido da fila de execução com sucesso\");document.location.reload(true);};};ajax.send();};};function renewToken(){if (confirm(\"Tem certeza que deseja renovar o token para a api VirtualAge?\")){var ajax = new XMLHttpRequest();var urlObj = new URL(location.href);var newUrl = location.protocol + \"//\" + location.host + location.pathname + \"?apikey=\" + urlObj.searchParams.get(\"apikey\") + \"&renewToken=1\";ajax.open(\"GET\", newUrl, true);ajax.onreadystatechange = function() {if (ajax.readyState == 4 && ajax.status == 200) {alert (\"Token renovado\");document.location.reload(true);};};ajax.send();};};function resetCount(elementid){if (confirm(\"Reinicializar a integração para o registro \"+elementid+\" ?\")){var ajax = new XMLHttpRequest();var urlObj = new URL(location.href);var newUrl = location.protocol + \"//\" + location.host + location.pathname + \"?apikey=\" + urlObj.searchParams.get(\"apikey\") + \"&resetone=\" + encodeURI(elementid);ajax.open(\"GET\", newUrl, true);ajax.onreadystatechange = function() {if (ajax.readyState == 4 && ajax.status == 200) {alert (\"Registro reinicializado com sucesso\");document.location.reload(true);};};ajax.send();};};function resetCountAll(pipelineid){if (confirm(\"Reinicializar a integração para todos os registros do pipeline \"+pipelineid+\" ?\")){var ajax = new XMLHttpRequest();var urlObj = new URL(location.href);var newUrl = location.protocol + \"//\" + location.host + location.pathname + \"?apikey=\" + urlObj.searchParams.get(\"apikey\") + \"&resetall=\" + encodeURI(pipelineid);ajax.open(\"GET\", newUrl, true);ajax.onreadystatechange = function() {if (ajax.readyState == 4 && ajax.status == 200) {alert (\"Registros reinicializados com sucesso\");document.location.reload(true);};};ajax.send();};};function resetDate(pipelineid){if (document.getElementById(\"date_\"+pipelineid).value == \"\"){alert (\"é necessário informar a data para alteração\"); return;}if (confirm(\"Alterar a data de controle para o pipeline \"+pipelineid+\" para \"+ document.getElementById(\"date_\"+pipelineid).value +\"?\")){var ajax = new XMLHttpRequest();var urlObj = new URL(location.href);var newUrl = location.protocol + \"//\" + location.host + location.pathname + \"?apikey=\" + urlObj.searchParams.get(\"apikey\") + \"&resetdate=\" + encodeURI(pipelineid) + \"&date=\" + document.getElementById(\"date_\"+pipelineid).value;ajax.open(\"GET\", newUrl, true);ajax.onreadystatechange = function() {if (ajax.readyState == 4 && ajax.status == 200) {alert (\"Data de controle reinicializada com sucesso\");document.location.reload(true);};};ajax.send();};};</script>
+</head>
+
+<body>
+    <div id=\"myModal\" class=\"modal\">
+        <div class=\"modal-content\">
+            <div class=\"modal-header\"><span class=\"close\">&times;</span>
+                <h3>Detalhes da mensagem</h3>
+            </div>
+            <div class=\"modal-body\">
+                <p id=\"modalText\"></p>
+            </div>
+        </div>
+    </div>
+    <h1>Status da Integra&ccedil;&atilde;o [ realm: piticas ]</h1>
+    <p><input type=\"button\" value=\"Renovar Token VirtualAge\"
+            style=\"font-size:14px;height:28px;width:220px;background-color:#bfa463;\" onclick=\"renewToken()\" />&nbsp;
+    </p>
+    <hr />
+    <h2>Pipeline: produtos</h2>
+    <p><input type=\"button\" value=\"Reiniciar todos\"
+            style=\"font-size:14px;height:28px;width:120px;background-color:#03862c;\"
+            onclick=\"resetCountAll("produtos")\" />&nbsp;</p>
+    <p><input id=\"date_produtos\" type=\"datetime-local\" value=\"\"
+            style=\"font-size:14px;height:28px;width:200px;background-color:#ffffff;\" /><input type=\"button\"
+            value=\"Reiniciar Data de Controle\"
+            style=\"font-size:14px;height:28px;width:200px;background-color:#bfa463;\"
+            onclick=\"resetDate("produtos")\" />&nbsp;</p>
+    <p>&Uacute;ltima execu&ccedil;&atilde;o: 2022-04-13T10:56:45+00:00 (0d:0h:2m:5s)</p>
+    <p>&Uacute;ltima execu&ccedil;&atilde;o com erro: 2022-04-12T19:02:30+00:00 (0d:15h:56m:20s)</p>
+    <p>Data de controle: 2022-04-13T10:56:45+00:00 (0d:0h:2m:5s)</p>
+    <table cellpadding=\"0\" cellspacing=\"0\">
+        <colgroup>
+            <col style=\"min-width:160px;max-width:160px;width:160px;\">
+            <col style=\"min-width:100px;max-width:100px;width:100px;\">
+            <col style=\"min-width:160px;max-width:160px;width:160px;\">
+            <col style=\"min-width:100px;max-width:100px;width:100px;\">
+            <col style=\"min-width:40px;max-width:40px;width:40px;\">
+            <col style=\"min-width:160px;max-width:160px;width:160px;\">
+            <col style=\"min-width:100px;max-width:100px;width:100px;\">
+            <col style=\"width:100%\">
+            <col style=\"min-width:100px;max-width:100px;width:80px;\">
+            <col style=\"min-width:140px;max-width:140px;width:140px;\">
+        </colgroup>
+        <thead>
+            <tr>
+                <td colspan=\"10\">Mensagens na fila de execução</td>
+            </tr>
+            <tr>
+                <td>Sincronização</td>
+                <td>Idade</td>
+                <td>Criação</td>
+                <td>Idade</td>
+                <td>Tent.</td>
+                <td>Identificador</td>
+                <td>Status</td>
+                <td>Mensagem</td>
+                <td>Origem do Erro</td>
+                <td>Ações</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2022-04-13T10:04:15+00:00</td>
+                <td>0d:0h:54m:35s</td>
+                <td>2022-03-29T12:26:00+00:00</td>
+                <td>14d:22h:32m:50s</td>
+                <td>361</td>
+                <td>26467</td>
+                <td>error</td>
+                <td>EAN não informado no VirtualAge para o sku 8693</td>
+                <td>Digibee</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("produtos.26467")\" /><input type=\"button\" value=\"Reiniciar\"
+                        style=\"width:60px;background-color:#03862c;\" onclick=\"resetCount("produtos.26467")\" /><input
+                        type=\"button\" value=\"X\" style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("produtos.26467")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:04:15+00:00</td>
+                <td>0d:0h:54m:35s</td>
+                <td>2022-03-29T12:26:00+00:00</td>
+                <td>14d:22h:32m:50s</td>
+                <td>361</td>
+                <td>26465</td>
+                <td>error</td>
+                <td>EAN não informado no VirtualAge para o sku 8692</td>
+                <td>Digibee</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("produtos.26465")\" /><input type=\"button\" value=\"Reiniciar\"
+                        style=\"width:60px;background-color:#03862c;\" onclick=\"resetCount("produtos.26465")\" /><input
+                        type=\"button\" value=\"X\" style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("produtos.26465")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:04:45+00:00</td>
+                <td>0d:0h:54m:5s</td>
+                <td>2022-03-29T12:26:00+00:00</td>
+                <td>14d:22h:32m:50s</td>
+                <td>361</td>
+                <td>26904</td>
+                <td>error</td>
+                <td>EAN não informado no VirtualAge para o sku 8694</td>
+                <td>Digibee</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("produtos.26904")\" /><input type=\"button\" value=\"Reiniciar\"
+                        style=\"width:60px;background-color:#03862c;\" onclick=\"resetCount("produtos.26904")\" /><input
+                        type=\"button\" value=\"X\" style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("produtos.26904")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:08:00+00:00</td>
+                <td>0d:0h:50m:50s</td>
+                <td>2022-04-12T16:39:45+00:00</td>
+                <td>0d:18h:19m:5s</td>
+                <td>22</td>
+                <td>03069</td>
+                <td>error</td>
+                <td>EAN não informado no VirtualAge para o sku 8171</td>
+                <td>Digibee</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("produtos.03069")\" /><input type=\"button\" value=\"Reiniciar\"
+                        style=\"width:60px;background-color:#03862c;\" onclick=\"resetCount("produtos.03069")\" /><input
+                        type=\"button\" value=\"X\" style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("produtos.03069")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:12:31+00:00</td>
+                <td>0d:0h:46m:19s</td>
+                <td>2022-03-29T12:24:01+00:00</td>
+                <td>14d:22h:34m:49s</td>
+                <td>361</td>
+                <td>02065</td>
+                <td>error</td>
+                <td>colecao: Nao informado</td>
+                <td>Presence</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("produtos.02065")\" /><input type=\"button\" value=\"Reiniciar\"
+                        style=\"width:60px;ba [... 33523 bytes ...] color:#4485b8;\"
+                        onclick=\"fetchDetail("saldos.23376")\" /><input type=\"button\" value=\"Reiniciar\"
+                        style=\"width:60px;background-color:#03862c;\" onclick=\"resetCount("saldos.23376")\" /><input
+                        type=\"button\" value=\"X\" style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("saldos.23376")\" /></td>
+            </tr>
+        </tbody>
+    </table><br />
+    <p style=\"color:red\"><b>Mostrando apenas 40 registros de 106 totais</b></p></BR>
+    <h2>Pipeline: faturamento</h2>
+    <p><input type=\"button\" value=\"Reiniciar todos\"
+            style=\"font-size:14px;height:28px;width:120px;background-color:#03862c;\"
+            onclick=\"resetCountAll("faturamento")\" />&nbsp;</p>
+    <p><input id=\"date_faturamento\" type=\"datetime-local\" value=\"\"
+            style=\"font-size:14px;height:28px;width:200px;background-color:#ffffff;\" /><input type=\"button\"
+            value=\"Reiniciar Data de Controle\"
+            style=\"font-size:14px;height:28px;width:200px;background-color:#bfa463;\"
+            onclick=\"resetDate("faturamento")\" />&nbsp;</p>
+    <p>&Uacute;ltima execu&ccedil;&atilde;o: 2022-04-13T10:56:45+00:00 (0d:0h:2m:5s)</p>
+    <p>&Uacute;ltima execu&ccedil;&atilde;o com erro: 2022-04-13T10:55:15+00:00 (0d:0h:3m:35s)</p>
+    <p>Data de controle: 2022-04-13T10:56:45+00:00 (0d:0h:2m:5s)</p>
+    <table cellpadding=\"0\" cellspacing=\"0\">
+        <colgroup>
+            <col style=\"min-width:160px;max-width:160px;width:160px;\">
+            <col style=\"min-width:100px;max-width:100px;width:100px;\">
+            <col style=\"min-width:160px;max-width:160px;width:160px;\">
+            <col style=\"min-width:100px;max-width:100px;width:100px;\">
+            <col style=\"min-width:40px;max-width:40px;width:40px;\">
+            <col style=\"min-width:160px;max-width:160px;width:160px;\">
+            <col style=\"min-width:100px;max-width:100px;width:100px;\">
+            <col style=\"width:100%\">
+            <col style=\"min-width:100px;max-width:100px;width:80px;\">
+            <col style=\"min-width:140px;max-width:140px;width:140px;\">
+        </colgroup>
+        <thead>
+            <tr>
+                <td colspan=\"10\">Mensagens na fila de execução</td>
+            </tr>
+            <tr>
+                <td>Sincronização</td>
+                <td>Idade</td>
+                <td>Criação</td>
+                <td>Idade</td>
+                <td>Tent.</td>
+                <td>Identificador</td>
+                <td>Status</td>
+                <td>Mensagem</td>
+                <td>Origem do Erro</td>
+                <td>Ações</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2022-04-13T10:01:42+00:00</td>
+                <td>0d:0h:57m:8s</td>
+                <td>2022-04-12T19:23:35+00:00</td>
+                <td>0d:15h:35m:15s</td>
+                <td>16</td>
+                <td>278163-99</td>
+                <td>error</td>
+                <td> Xml of AccessKey not found.</td>
+                <td>VirtualAge</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("faturamento.278163-99")\" /><input type=\"button\" value=\"Reiniciar\"
+                        style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("faturamento.278163-99")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("faturamento.278163-99")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:01:54+00:00</td>
+                <td>0d:0h:56m:56s</td>
+                <td>2022-04-12T19:23:35+00:00</td>
+                <td>0d:15h:35m:15s</td>
+                <td>16</td>
+                <td>276682-99</td>
+                <td>error</td>
+                <td> Xml of AccessKey not found.</td>
+                <td>VirtualAge</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("faturamento.276682-99")\" /><input type=\"button\" value=\"Reiniciar\"
+                        style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("faturamento.276682-99")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("faturamento.276682-99")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:05:57+00:00</td>
+                <td>0d:0h:52m:53s</td>
+                <td>2022-04-12T19:23:35+00:00</td>
+                <td>0d:15h:35m:15s</td>
+                <td>18</td>
+                <td>265660-99</td>
+                <td>error</td>
+                <td> Xml of AccessKey not found.</td>
+                <td>VirtualAge</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("faturamento.265660-99")\" /><input type=\"button\" value=\"Reiniciar\"
+                        style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("faturamento.265660-99")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("faturamento.265660-99")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:06:19+00:00</td>
+                <td>0d:0h:52m:31s</td>
+                <td>2022-04-12T19:24:19+00:00</td>
+                <td>0d:15h:34m:31s</td>
+                <td>16</td>
+                <td>278272-99</td>
+                <td>error</td>
+                <td>sap_Id: Pedido externo nao informado. Obrigatorio para tipo destinatario Loja</td>
+                <td>Presence</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("faturamento.278272-99")\" /><input type=\"button\" value=\"Reiniciar\"
+                        style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("faturamento.278272-99")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("faturamento.278272-99")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:06:21+00:00</td>
+                <td>0d:0h:52m:29s</td>
+                <td>2022-04-12T19:25:17+00:00</td>
+                <td>0d:15h:33m:33s</td>
+                <td>16</td>
+                <td>277939-99</td>
+                <td>error</td>
+                <td>sap_Id: Pedido externo nao informado. Obrigatorio para tipo destinatario Loja</td>
+                <td>Presence</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("faturamento.277939-99")\" /><input type=\"button\" value=\"Reiniciar\"
+                        style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("faturamento.277939-99")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("faturamento.277939-99")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:07:02+00:00</td>
+                <td>0d:0h:51m:48s</td>
+                <td>2022-04-12T19:25:17+00:00</td>
+                <td>0d:15h:33m:33s</td>
+                <td>16</td>
+                <td>277641-99</td>
+                <td>error</td>
+                <td>sap_Id: Pedido externo nao informado. Obrigatorio para tipo destinatario Loja</td>
+                <td>Presence</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("faturamento.277641-99")\" /><input type=\"button\" value=\"Reiniciar\"
+                        style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("faturamento.277641-99")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("faturamento.277641-99")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:08:02+00:00</td>
+                <td>0d:0h:50m:48s</td>
+                <td>2022-04-12T19:25:18+00:00</td>
+                <td>0d:15h:33m:32s</td>
+                <td>16</td>
+                <td>278353-99</td>
+                <td>error</td>
+                <td>sap_Id: Pedido externo nao informado. Obrigatorio para tipo destinatario Loja</td>
+                <td>Presence</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("faturamento.278353-99")\" /><input type=\"button\" value=\"Reiniciar\"
+                        style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("faturamento.278353-99")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("faturamento.278353-99")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:09:39+00:00</td>
+                <td>0d:0h:49m:11s</td>
+                <td>2022-04-12T19:26:40+00:00</td>
+                <td>0d:15h:32m:10s</td>
+                <td>16</td>
+                <td>278459-99</td>
+                <td>error</td>
+                <td> Xml of AccessKey not found.</td>
+                <td>VirtualAge</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("faturamento.278459-99")\" /><input type=\"button\" value=\"Reiniciar\"
+                        style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("faturamento.278459-99")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("faturamento.278459-99")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:09:54+00:00</td>
+                <td>0d:0h:48m:56s</td>
+                <td>2022-04-12T19:27:50+00:00</td>
+                <td>0d:15h:31m:0s</td>
+                <td>16</td>
+                <td>276644-99</td>
+                <td>error</td>
+                <td> Xml of AccessKey not found.</td>
+                <td>VirtualAge</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("faturamento.276644-99")\" /><input type=\"button\" value=\"Reiniciar\"
+                        style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("faturamento.276644-99")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("faturamento.276644-99")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:11:07+00:00</td>
+                <td>0d:0h:47m:43s</td>
+                <td>2022-04-12T19:27:50+00:00</td>
+                <td>0d:15h:31m:0s</td>
+                <td>16</td>
+                <td>277355-99</td>
+                <td>error</td>
+                <td> Xml of AccessKey not found.</td>
+                <td>VirtualAge</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("faturamento.277355-99")\" /><input type=\"button\" value=\"Reiniciar\"
+                        style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("faturamento.277355-99")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("faturamento.277355-99")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:11:33+00:00</td>
+                <td>0d:0h:47m:17s</td>
+                <td>2022-04-12T19:27:51+00:00</td>
+                <td>0d:15h:30m:59s</td>
+                <td>16</td>
+                <td>277855-99</td>
+                <td>error</td>
+                <td> Xml of AccessKey not found.</td>
+                <td>VirtualAge</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("faturamento.277855-99")\" /><input type=\"button\" value=\"Reiniciar\"
+                        style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("faturamento.277855-99")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("faturamento.277855-99")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:11:47+00:00</td>
+                <td>0d:0h:47m:3s</td>
+                <td>2022-04-12T19:27:54+00:00</td>
+                <td>0d:15h:30m:56s</td>
+                <td>16</td>
+                <td>278664-99</td>
+                <td>error</td>
+                <td> Xml of AccessKey not found.</td>
+                <td>VirtualAge</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("faturamento.278664-99")\" /><input type=\"button\" value=\"Reiniciar\"
+                        style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("faturamento.278664-99")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("faturamento.278664-99")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:12:18+00:00</td>
+                <td>0d:0h:46m:32s</td>
+                <td>2022-04-12T19:28:37+00:00</td>
+                <td>0d:15h:30m:13s</td>
+                <td>16</td>
+                <td>277785-99</td>
+                <td>error</td>
+                <td> Xml of AccessKey not found.</td>
+                <td>VirtualAge</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("faturamento.277785-99")\" /><input type=\"button\" value=\"Reiniciar\"
+                        style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("faturamento.277785-99")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("faturamento.277785-99")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:12:47+00:00</td>
+                <td>0d:0h:46m:3s</td>
+                <td>2022-04-12T19:30:17+00:00</td>
+                <td>0d:15h:28m:33s</td>
+                <td>16</td>
+                <td>279424-99</td>
+                <td>error</td>
+                <td>codigo_Externo[20506].pedidovinculado_Numero: Nenhum item de pedido localizado para o item da nota
+                    fiscal: Loja=99 Serie=99 Numero=279424 [... 20864 bytes ...] or</td>
+                <td>Status</td>
+                <td>Mensagem</td>
+                <td>Origem do Erro</td>
+                <td>Ações</td>
+            </tr>
+            </thead>
+        <tbody>
+            <tr>
+                <td>2022-04-13T09:59:21+00:00</td>
+                <td>0d:0h:59m:29s</td>
+                <td>2022-04-06T11:30:51+00:00</td>
+                <td>6d:23h:27m:59s</td>
+                <td>171</td>
+                <td>Emp3.Cli1016.Tit27494-1</td>
+                <td>error</td>
+                <td>DocumentoFiscal: Nao foi possivel localizar nenhum documento fiscal relacionado, por favor informe a
+                    tag modeloNF</td>
+                <td>Presence</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("titulos.Emp3.Cli1016.Tit27494-1")\" /><input type=\"button\"
+                        value=\"Reiniciar\" style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("titulos.Emp3.Cli1016.Tit27494-1")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("titulos.Emp3.Cli1016.Tit27494-1")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T09:59:21+00:00</td>
+                <td>0d:0h:59m:29s</td>
+                <td>2022-04-05T16:29:10+00:00</td>
+                <td>7d:18h:29m:40s</td>
+                <td>190</td>
+                <td>Emp3.Cli1064.Tit27455-1</td>
+                <td>error</td>
+                <td>DocumentoFiscal: Nao foi possivel localizar nenhum documento fiscal relacionado, por favor informe a
+                    tag modeloNF</td>
+                <td>Presence</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("titulos.Emp3.Cli1064.Tit27455-1")\" /><input type=\"button\"
+                        value=\"Reiniciar\" style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("titulos.Emp3.Cli1064.Tit27455-1")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("titulos.Emp3.Cli1064.Tit27455-1")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:03:41+00:00</td>
+                <td>0d:0h:55m:9s</td>
+                <td>2022-04-04T10:27:30+00:00</td>
+                <td>9d:0h:31m:20s</td>
+                <td>220</td>
+                <td>Emp3.Cli1064.Tit27276-1</td>
+                <td>error</td>
+                <td>DocumentoFiscal: Nao foi possivel localizar nenhum documento fiscal relacionado, por favor informe a
+                    tag modeloNF</td>
+                <td>Presence</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("titulos.Emp3.Cli1064.Tit27276-1")\" /><input type=\"button\"
+                        value=\"Reiniciar\" style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("titulos.Emp3.Cli1064.Tit27276-1")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("titulos.Emp3.Cli1064.Tit27276-1")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:09:01+00:00</td>
+                <td>0d:0h:49m:49s</td>
+                <td>2022-04-05T18:37:40+00:00</td>
+                <td>7d:16h:21m:10s</td>
+                <td>188</td>
+                <td>Emp3.Cli549699.Tit27477-1</td>
+                <td>error</td>
+                <td>DocumentoFiscal: Nao foi possivel localizar nenhum documento fiscal relacionado, por favor informe a
+                    tag modeloNF</td>
+                <td>Presence</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("titulos.Emp3.Cli549699.Tit27477-1")\" /><input type=\"button\"
+                        value=\"Reiniciar\" style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("titulos.Emp3.Cli549699.Tit27477-1")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("titulos.Emp3.Cli549699.Tit27477-1")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:13:41+00:00</td>
+                <td>0d:0h:45m:9s</td>
+                <td>2022-04-11T15:06:00+00:00</td>
+                <td>1d:19h:52m:50s</td>
+                <td>48</td>
+                <td>Emp3.Cli554800.Tit27714-1</td>
+                <td>error</td>
+                <td>DocumentoFiscal: Nao foi possivel localizar nenhum documento fiscal relacionado, por favor informe a
+                    tag modeloNF</td>
+                <td>Presence</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("titulos.Emp3.Cli554800.Tit27714-1")\" /><input type=\"button\"
+                        value=\"Reiniciar\" style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("titulos.Emp3.Cli554800.Tit27714-1")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("titulos.Emp3.Cli554800.Tit27714-1")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:16:31+00:00</td>
+                <td>0d:0h:42m:19s</td>
+                <td>2022-04-05T18:45:20+00:00</td>
+                <td>7d:16h:13m:30s</td>
+                <td>188</td>
+                <td>Emp3.Cli966.Tit27478-1</td>
+                <td>error</td>
+                <td>DocumentoFiscal: Nao foi possivel localizar nenhum documento fiscal relacionado, por favor informe a
+                    tag modeloNF</td>
+                <td>Presence</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("titulos.Emp3.Cli966.Tit27478-1")\" /><input type=\"button\"
+                        value=\"Reiniciar\" style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("titulos.Emp3.Cli966.Tit27478-1")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("titulos.Emp3.Cli966.Tit27478-1")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:34:31+00:00</td>
+                <td>0d:0h:24m:19s</td>
+                <td>2022-03-28T11:34:10+00:00</td>
+                <td>15d:23h:24m:40s</td>
+                <td>308</td>
+                <td>Emp3.Cli878.Tit100792-5</td>
+                <td>error</td>
+                <td>DocumentoFiscal: Nao foi possivel localizar nenhum documento fiscal relacionado, por favor informe a
+                    tag modeloNF</td>
+                <td>Presence</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("titulos.Emp3.Cli878.Tit100792-5")\" /><input type=\"button\"
+                        value=\"Reiniciar\" style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("titulos.Emp3.Cli878.Tit100792-5")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("titulos.Emp3.Cli878.Tit100792-5")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:35:50+00:00</td>
+                <td>0d:0h:23m:0s</td>
+                <td>2022-04-11T15:28:01+00:00</td>
+                <td>1d:19h:30m:49s</td>
+                <td>48</td>
+                <td>Emp3.Cli605783.Tit27720-1</td>
+                <td>error</td>
+                <td>DocumentoFiscal: Nao foi possivel localizar nenhum documento fiscal relacionado, por favor informe a
+                    tag modeloNF</td>
+                <td>Presence</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("titulos.Emp3.Cli605783.Tit27720-1")\" /><input type=\"button\"
+                        value=\"Reiniciar\" style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("titulos.Emp3.Cli605783.Tit27720-1")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("titulos.Emp3.Cli605783.Tit27720-1")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:37:41+00:00</td>
+                <td>0d:0h:21m:9s</td>
+                <td>2022-04-05T16:05:00+00:00</td>
+                <td>7d:18h:53m:50s</td>
+                <td>191</td>
+                <td>Emp3.Cli1064.Tit27449-1</td>
+                <td>error</td>
+                <td>DocumentoFiscal: Nao foi possivel localizar nenhum documento fiscal relacionado, por favor informe a
+                    tag modeloNF</td>
+                <td>Presence</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("titulos.Emp3.Cli1064.Tit27449-1")\" /><input type=\"button\"
+                        value=\"Reiniciar\" style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("titulos.Emp3.Cli1064.Tit27449-1")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("titulos.Emp3.Cli1064.Tit27449-1")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:41:11+00:00</td>
+                <td>0d:0h:17m:39s</td>
+                <td>2022-04-13T10:40:30+00:00</td>
+                <td>0d:0h:18m:20s</td>
+                <td>5</td>
+                <td>Emp3.Cli566775.Tit27887-1</td>
+                <td>error</td>
+                <td>DocumentoFiscal: Nao foi possivel localizar nenhum documento fiscal relacionado, por favor informe a
+                    tag modeloNF</td>
+                <td>Presence</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("titulos.Emp3.Cli566775.Tit27887-1")\" /><input type=\"button\"
+                        value=\"Reiniciar\" style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("titulos.Emp3.Cli566775.Tit27887-1")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("titulos.Emp3.Cli566775.Tit27887-1")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:42:51+00:00</td>
+                <td>0d:0h:15m:59s</td>
+                <td>2022-04-04T10:01:21+00:00</td>
+                <td>9d:0h:57m:29s</td>
+                <td>221</td>
+                <td>Emp3.Cli100000010.Tit24913-1</td>
+                <td>error</td>
+                <td>DocumentoFiscal: Nao foi possivel localizar nenhum documento fiscal relacionado, por favor informe a
+                    tag modeloNF</td>
+                <td>Presence</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("titulos.Emp3.Cli100000010.Tit24913-1")\" /><input type=\"button\"
+                        value=\"Reiniciar\" style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("titulos.Emp3.Cli100000010.Tit24913-1")\" /><input type=\"button\"
+                        value=\"X\" style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("titulos.Emp3.Cli100000010.Tit24913-1")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:43:21+00:00</td>
+                <td>0d:0h:15m:29s</td>
+                <td>2022-04-12T13:39:10+00:00</td>
+                <td>0d:21h:19m:40s</td>
+                <td>26</td>
+                <td>Emp3.Cli1160.Tit27804-1</td>
+                <td>error</td>
+                <td>DocumentoFiscal: Nao foi possivel localizar nenhum documento fiscal relacionado, por favor informe a
+                    tag modeloNF</td>
+                <td>Presence</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("titulos.Emp3.Cli1160.Tit27804-1")\" /><input type=\"button\"
+                        value=\"Reiniciar\" style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("titulos.Emp3.Cli1160.Tit27804-1")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("titulos.Emp3.Cli1160.Tit27804-1")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:47:01+00:00</td>
+                <td>0d:0h:11m:49s</td>
+                <td>2022-04-13T10:46:20+00:00</td>
+                <td>0d:0h:12m:31s</td>
+                <td>5</td>
+                <td>Emp3.Cli266.Tit27888-1</td>
+                <td>error</td>
+                <td>DocumentoFiscal: Nao foi possivel localizar nenhum documento fiscal relacionado, por favor informe a
+                    tag modeloNF</td>
+                <td>Presence</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("titulos.Emp3.Cli266.Tit27888-1")\" /><input type=\"button\"
+                        value=\"Reiniciar\" style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("titulos.Emp3.Cli266.Tit27888-1")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("titulos.Emp3.Cli266.Tit27888-1")\" /></td>
+            </tr>
+            <tr>
+                <td>2022-04-13T10:53:50+00:00</td>
+                <td>0d:0h:5m:0s</td>
+                <td>2022-04-13T09:53:00+00:00</td>
+                <td>0d:1h:5m:50s</td>
+                <td>6</td>
+                <td>Emp3.Cli398.Tit27885-1</td>
+                <td>error</td>
+                <td>DocumentoFiscal: Nao foi possivel localizar nenhum documento fiscal relacionado, por favor informe a
+                    tag modeloNF</td>
+                <td>Presence</td>
+                <td><input type=\"button\" value=\"Detalhes\" style=\"width:55px;background-color:#4485b8;\"
+                        onclick=\"fetchDetail("titulos.Emp3.Cli398.Tit27885-1")\" /><input type=\"button\"
+                        value=\"Reiniciar\" style=\"width:60px;background-color:#03862c;\"
+                        onclick=\"resetCount("titulos.Emp3.Cli398.Tit27885-1")\" /><input type=\"button\" value=\"X\"
+                        style=\"width:24px;background-color:#e74b4b;\"
+                        onclick=\"clearMessage("titulos.Emp3.Cli398.Tit27885-1")\" /></td>
+            </tr>
+        </tbody>
+    </table><br />
+</body>
+
+</html>
+</body>
+</html>

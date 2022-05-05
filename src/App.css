@@ -119,3 +119,8 @@ tbody{
 .col > p{
   line-height: 12px;
 }
+.video {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

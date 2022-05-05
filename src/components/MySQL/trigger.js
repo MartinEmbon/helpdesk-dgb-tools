@@ -9,18 +9,20 @@ const CreateCollection = () => {
     <div className="c-container">
       <MongoMenu />
       <div className="card-container">
-
         <div className="my-card">
           <Card>
             <Card.Header>Commit e Rollback</Card.Header>
             <Card.Body>
               <Card.Title>START TRANSACTION</Card.Title>
               <Card.Text>
-                <div className="col">            
-                  <p>START TRANSACTION;</p>                  
-                  <p>update vendedores set comissao = comissao * 1.5;</p>
-                  <p>rollback; (desfazer)</p>
-                  <p>commit; (confirmar)</p>
+                <div className="col">
+                  <p>DELIMITER//</p>
+                  <p>CREATE TRIGGER nome_do_trigger</p>
+                  <p>BEFORE INSERT</p>
+                  <p>ON nome_da_tabela FOR EACH ROW</p>
+                  <p>BEGIN</p>
+                  <p>-- codigo_a_ser_executado</p>
+                  <p>END//</p>
                 </div>
               </Card.Text>
               <Button variant="primary" disabled>Copy Code</Button>

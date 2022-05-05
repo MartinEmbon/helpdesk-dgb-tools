@@ -10,6 +10,7 @@ const Sidebar = () => {
         <li><Link to="/mysql/ddl">MySQL</Link> </li>
         <li><Link to="/mongodb/delete">Oracle</Link> </li>
         <li><Link to="/docker">Docker</Link></li>
+        <li><Link to="/certificados">Certificados</Link></li>
       </ul>
     </div>
   )
